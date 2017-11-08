@@ -16,15 +16,15 @@
         />
 
     <LinearLayout
-        android:orientation="vertical"
-        android:background="#02bc7e"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="635dp"
+        android:background="@drawable/wall3"
+        android:orientation="vertical">
 
         <com.andrognito.patternlockview.PatternLockView
             android:id="@+id/pattern_lock_view"
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
