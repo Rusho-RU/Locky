@@ -1,5 +1,6 @@
 package com.dragontwister.locky;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,15 +15,18 @@ import java.util.List;
 
 import io.paperdb.Paper;
 
-public class MainActivity extends AppCompatActivity {
-    String save_pattern_key = "pattern_code";
-    String final_pattern = "";
+public class LockyWithPatternLock extends AppCompatActivity {
+    public String save_pattern_key = "pattern_code";
+    public String final_pattern = "";
 
     PatternLockView mPatternLockView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        startService(new Intent(this, LockyService.class));
+
         Paper.init(this);
 
         final String save_pattern = Paper.book().read(save_pattern_key);
@@ -41,11 +45,12 @@ public class MainActivity extends AppCompatActivity {
                 public void onComplete(List<PatternLockView.Dot> pattern) {
                     final_pattern = PatternLockUtils.patternToString(mPatternLockView, pattern);
 
-                    if(final_pattern.equals(save_pattern))
-                        Toast.makeText(MainActivity.this, "Password Correct", Toast.LENGTH_SHORT).show();
-
+                    if(final_pattern.equals(save_pattern)) {
+                        Toast.makeText(LockyWithPatternLock.this, "Password Correct", Toast.LENGTH_SHORT).show();
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                    }
                     else
-                        Toast.makeText(MainActivity.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LockyWithPatternLock.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -78,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Paper.book().write(save_pattern_key, final_pattern);
-                    Toast.makeText(MainActivity.this, "Pattern Saved!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LockyWithPatternLock.this, "Pattern Saved!!", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             });

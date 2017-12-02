@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.dragontwister.locky.MainActivity">
+    tools:context="com.dragontwister.locky.LockyWithPatternLock">
 
     <TextView
         android:layout_width="wrap_content"
@@ -17,7 +17,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="635dp"
+        android:layout_height="515dp"
         android:background="@drawable/wall3"
         android:orientation="vertical">
 
