@@ -15,7 +15,7 @@ import java.util.List;
 
 import io.paperdb.Paper;
 
-public class LockyWithPatternLock extends AppCompatActivity {
+public class Locky extends AppCompatActivity {
     public String save_pattern_key = "pattern_code";
     public String final_pattern = "";
 
@@ -46,11 +46,11 @@ public class LockyWithPatternLock extends AppCompatActivity {
                     final_pattern = PatternLockUtils.patternToString(mPatternLockView, pattern);
 
                     if(final_pattern.equals(save_pattern)) {
-                        Toast.makeText(LockyWithPatternLock.this, "Password Correct", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Locky.this, "Password Correct", Toast.LENGTH_SHORT).show();
                         android.os.Process.killProcess(android.os.Process.myPid());
                     }
                     else
-                        Toast.makeText(LockyWithPatternLock.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Locky.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -83,7 +83,7 @@ public class LockyWithPatternLock extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Paper.book().write(save_pattern_key, final_pattern);
-                    Toast.makeText(LockyWithPatternLock.this, "Pattern Saved!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Locky.this, "Pattern Saved!!", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             });
