@@ -1,6 +1,8 @@
 package com.dragontwister.locky;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,67 +29,142 @@ public class Locky extends AppCompatActivity {
 
         startService(new Intent(this, LockyService.class));
 
-        Paper.init(this);
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        boolean isScreenOn = pm.isScreenOn();
 
+        Paper.init(this);
         final String save_pattern = Paper.book().read(save_pattern_key);
 
-        if(save_pattern != null && !save_pattern.equals("null")){
-            setContentView(R.layout.pattern_screen);
-            mPatternLockView = findViewById(R.id.pattern_lock_view);
-            mPatternLockView.addPatternLockListener(new PatternLockViewListener() {
-                @Override
-                public void onStarted(){}
+        if (isScreenOn == true && save_pattern != null && !save_pattern.equals("null")) {
+            setContentView(R.layout.test_reset_password);
+            Button button = findViewById(R.id.reset_id);
 
+            button.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onProgress(List<PatternLockView.Dot> progressPattern){}
+                public void onClick(View v) {
+                    Toast.makeText(Locky.this, "Confirm Password", Toast.LENGTH_SHORT).show();
+                    setContentView(R.layout.test_general_password_layout);
 
-                @Override
-                public void onComplete(List<PatternLockView.Dot> pattern) {
-                    final_pattern = PatternLockUtils.patternToString(mPatternLockView, pattern);
+                    mPatternLockView = findViewById(R.id.pattern_lock_view2);
+                    mPatternLockView.addPatternLockListener(new PatternLockViewListener() {
+                        @Override
+                        public void onStarted() {}
 
-                    if(final_pattern.equals(save_pattern)) {
-                        Toast.makeText(Locky.this, "Password Correct", Toast.LENGTH_SHORT).show();
-                        android.os.Process.killProcess(android.os.Process.myPid());
-                    }
-                    else
-                        Toast.makeText(Locky.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
+                        @Override
+                        public void onProgress(List<PatternLockView.Dot> progressPattern) {}
+
+                        @Override
+                        public void onComplete(List<PatternLockView.Dot> pattern) {
+                            final_pattern = PatternLockUtils.patternToString(mPatternLockView, pattern);
+
+                            if(final_pattern.equals(save_pattern)){
+                                Toast.makeText(Locky.this, "Password Correct", Toast.LENGTH_SHORT).show();
+                                setContentView(R.layout.activity_main);
+                                mPatternLockView = findViewById(R.id.pattern_lock_view);
+
+                                mPatternLockView.addPatternLockListener(new PatternLockViewListener() {
+                                    @Override
+                                    public void onStarted() {
+                                    }
+
+                                    @Override
+                                    public void onProgress(List<PatternLockView.Dot> progressPattern) {
+                                    }
+
+                                    @Override
+                                    public void onComplete(List<PatternLockView.Dot> pattern) {
+                                        final_pattern = PatternLockUtils.patternToString(mPatternLockView, pattern);
+                                    }
+
+                                    @Override
+                                    public void onCleared() {
+                                    }
+                                });
+
+                                Button btnSetup = findViewById(R.id.btnSetPattern);
+                                btnSetup.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Paper.book().write(save_pattern_key, final_pattern);
+                                        Toast.makeText(Locky.this, "Pattern Saved!!", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                });
+                            }
+
+                            else
+                                Toast.makeText(Locky.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onCleared() {}
+                    });
                 }
-
-                @Override
-                public void onCleared(){}
             });
         }
 
-        else{
-            setContentView(R.layout.activity_main);
-            mPatternLockView = findViewById(R.id.pattern_lock_view);
+        else {
+            if (save_pattern != null && !save_pattern.equals("null")) {
+                setContentView(R.layout.pattern_screen);
+                mPatternLockView = findViewById(R.id.pattern_lock_view);
+                mPatternLockView.addPatternLockListener(new PatternLockViewListener() {
+                    @Override
+                    public void onStarted() {
+                    }
 
-            mPatternLockView.addPatternLockListener(new PatternLockViewListener() {
-                @Override
-                public void onStarted(){}
+                    @Override
+                    public void onProgress(List<PatternLockView.Dot> progressPattern) {
+                    }
 
-                @Override
-                public void onProgress(List<PatternLockView.Dot> progressPattern){}
+                    @Override
+                    public void onComplete(List<PatternLockView.Dot> pattern) {
+                        final_pattern = PatternLockUtils.patternToString(mPatternLockView, pattern);
 
-                @Override
-                public void onComplete(List<PatternLockView.Dot> pattern) {
-                    final_pattern = PatternLockUtils.patternToString(mPatternLockView, pattern);
-                }
+                        if (final_pattern.equals(save_pattern)) {
+                            Toast.makeText(Locky.this, "Password Correct", Toast.LENGTH_SHORT).show();
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        } else
+                            Toast.makeText(Locky.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
+                    }
 
-                @Override
-                public void onCleared() {}
-            });
+                    @Override
+                    public void onCleared() {
+                    }
+                });
+            } else {
+                setContentView(R.layout.activity_main);
+                mPatternLockView = findViewById(R.id.pattern_lock_view);
 
-            Button btnSetup = findViewById(R.id.btnSetPattern);
-            btnSetup.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Paper.book().write(save_pattern_key, final_pattern);
-                    Toast.makeText(Locky.this, "Pattern Saved!!", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-            });
+                mPatternLockView.addPatternLockListener(new PatternLockViewListener() {
+                    @Override
+                    public void onStarted() {
+                    }
 
+                    @Override
+                    public void onProgress(List<PatternLockView.Dot> progressPattern) {
+                    }
+
+                    @Override
+                    public void onComplete(List<PatternLockView.Dot> pattern) {
+                        final_pattern = PatternLockUtils.patternToString(mPatternLockView, pattern);
+                    }
+
+                    @Override
+                    public void onCleared() {
+                    }
+                });
+
+                Button btnSetup = findViewById(R.id.btnSetPattern);
+                btnSetup.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Paper.book().write(save_pattern_key, final_pattern);
+                        Toast.makeText(Locky.this, "Pattern Saved!!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+
+            }
         }
     }
 }
