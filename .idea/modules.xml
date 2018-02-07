@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LockScreenApps.iml" filepath="$PROJECT_DIR$/LockScreenApps.iml" />
+      <module fileurl="file://H:\Documents\Projects\Android_Studio_Project\Locky\LockScreenApps.iml" filepath="H:\Documents\Projects\Android_Studio_Project\Locky\LockScreenApps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Locky.iml" filepath="$PROJECT_DIR$/Locky.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
