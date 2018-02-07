@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Locky.iml" filepath="$PROJECT_DIR$/Locky.iml" />
+      <module fileurl="file://H:\Documents\Projects\Android_Studio_Project\Locky\Locky.iml" filepath="H:\Documents\Projects\Android_Studio_Project\Locky\Locky.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://H:\Documents\Projects\Android_Studio_Project\Locky\app\app.iml" filepath="H:\Documents\Projects\Android_Studio_Project\Locky\app\app.iml" />
     </modules>
   </component>
 </project>
