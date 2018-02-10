@@ -7,21 +7,51 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.andrognito.patternlockview.PatternLockView;
 import com.andrognito.patternlockview.listener.PatternLockViewListener;
 import com.andrognito.patternlockview.utils.PatternLockUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.locks.Lock;
 
 import io.paperdb.Paper;
 
 public class Locky extends AppCompatActivity {
-    public String save_pattern_key = "pattern_code";
-    public String final_pattern = "";
+    private String save_pattern_key = "pattern_code";
+    private String final_pattern = "";
+    private PatternLockView mPatternLockView;
+    private static final int layoutNum = 5;
 
-    PatternLockView mPatternLockView;
+    private ArrayList<Integer>layout;
+    private ArrayList<Integer>ID;
+    Random random = new Random();
+
+    private void addLayout(){
+        layout.add(R.layout.background1);
+        layout.add(R.layout.background2);
+        layout.add(R.layout.background3);
+        layout.add(R.layout.background4);
+        layout.add(R.layout.background5);
+        layout.add(R.layout.background6);
+
+        ID.add(R.id.pattern_lock_view1);
+        ID.add(R.id.pattern_lock_view2);
+        ID.add(R.id.pattern_lock_view3);
+        ID.add(R.id.pattern_lock_view4);
+        ID.add(R.id.pattern_lock_view5);
+        ID.add(R.id.pattern_lock_view6);
+    }
+
+    Locky(){
+        layout = new ArrayList<>();
+        ID = new ArrayList<>();
+        addLayout();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +135,10 @@ public class Locky extends AppCompatActivity {
 
         else {
             if (save_pattern != null && !save_pattern.equals("null")) {
-                setContentView(R.layout.pattern_screen);
-                mPatternLockView = findViewById(R.id.pattern_lock_view);
+                int id = random.nextInt(layoutNum);
+                setContentView(layout.get(id));
+                mPatternLockView = findViewById(ID.get(id));
+
                 mPatternLockView.addPatternLockListener(new PatternLockViewListener() {
                     @Override
                     public void onStarted() {
