@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.andrognito.patternlockview.PatternLockView;
@@ -17,7 +16,6 @@ import com.andrognito.patternlockview.utils.PatternLockUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.locks.Lock;
 
 import io.paperdb.Paper;
 
@@ -74,7 +72,7 @@ public class Locky extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(Locky.this, "Confirm Password", Toast.LENGTH_SHORT).show();
-                    setContentView(R.layout.test_general_password_layout);
+                    setContentView(R.layout.general_password_layout);
 
                     mPatternLockView = findViewById(R.id.pattern_lock_view2);
                     mPatternLockView.addPatternLockListener(new PatternLockViewListener() {
