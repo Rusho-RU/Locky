@@ -45,7 +45,7 @@ public class Locky extends AppCompatActivity {
         ID.add(R.id.pattern_lock_view6);
     }
 
-    Locky(){
+    public Locky(){
         layout = new ArrayList<>();
         ID = new ArrayList<>();
         addLayout();
