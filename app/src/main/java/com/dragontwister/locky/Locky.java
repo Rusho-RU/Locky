@@ -16,7 +16,6 @@ import com.andrognito.patternlockview.utils.PatternLockUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.locks.Lock;
 
 import io.paperdb.Paper;
 
@@ -25,6 +24,7 @@ public class Locky extends AppCompatActivity {
     private String final_pattern = "";
     private PatternLockView mPatternLockView;
     private static final int layoutNum = 5;
+    private boolean accessible = false;
 
     private ArrayList<Integer>layout;
     private ArrayList<Integer>ID;
@@ -56,7 +56,7 @@ public class Locky extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //startService(new Intent(this, LockyService.class));
+        startService(new Intent(this, LockyService.class));
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         assert pm != null;
@@ -142,8 +142,7 @@ public class Locky extends AppCompatActivity {
 
                 mPatternLockView.addPatternLockListener(new PatternLockViewListener() {
                     @Override
-                    public void onStarted() {
-                    }
+                    public void onStarted() {}
 
                     @Override
                     public void onProgress(List<PatternLockView.Dot> progressPattern) {
@@ -151,7 +150,7 @@ public class Locky extends AppCompatActivity {
 //                        mHomeWatcher.setOnHomePressedListener(new OnHomePressedListener() {
 //                            @Override
 //                            public void onHomePressed() {
-//                                Toast.makeText(Locky.this, "Fuck Home Key", Toast.LENGTH_SHORT).show();
+//
 //                            }
 //                            @Override
 //                            public void onHomeLongPressed() {
@@ -166,6 +165,7 @@ public class Locky extends AppCompatActivity {
 
                         if (final_pattern.equals(save_pattern)) {
                             Toast.makeText(Locky.this, "Password Correct", Toast.LENGTH_SHORT).show();
+                            accessible = true;
                             android.os.Process.killProcess(android.os.Process.myPid());
                         } else
                             Toast.makeText(Locky.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
@@ -178,6 +178,7 @@ public class Locky extends AppCompatActivity {
             }
 
             else {
+                accessible = false;
                 setContentView(R.layout.activity_set__password);
                 Button button = findViewById(R.id.setPassButton);
 
@@ -219,6 +220,24 @@ public class Locky extends AppCompatActivity {
                 });
 
             }
+        }
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        Toast.makeText(this, "Please insert the correct pattern", Toast.LENGTH_SHORT).show();
+
+        if (accessible) {
+            super.onUserLeaveHint();
+        }
+    }
+
+    @Override
+    public void onBackPressed(){
+        Toast.makeText(this, "Please insert the correct pattern", Toast.LENGTH_SHORT).show();
+
+        if(accessible){
+            super.onBackPressed();
         }
     }
 }
