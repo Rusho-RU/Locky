@@ -56,7 +56,7 @@ public class Locky extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        startService(new Intent(this, LockyService.class));
+        //startService(new Intent(this, LockyService.class));
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         assert pm != null;
