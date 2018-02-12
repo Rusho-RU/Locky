@@ -16,6 +16,7 @@ import com.andrognito.patternlockview.utils.PatternLockUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.locks.Lock;
 
 import io.paperdb.Paper;
 
@@ -136,6 +137,7 @@ public class Locky extends AppCompatActivity {
             if (save_pattern != null && !save_pattern.equals("null")) {
                 int id = random.nextInt(layoutNum);
                 setContentView(layout.get(id));
+
                 mPatternLockView = findViewById(ID.get(id));
 
                 mPatternLockView.addPatternLockListener(new PatternLockViewListener() {
@@ -145,6 +147,17 @@ public class Locky extends AppCompatActivity {
 
                     @Override
                     public void onProgress(List<PatternLockView.Dot> progressPattern) {
+//                        HomeWatcher mHomeWatcher = new HomeWatcher(Locky.this);
+//                        mHomeWatcher.setOnHomePressedListener(new OnHomePressedListener() {
+//                            @Override
+//                            public void onHomePressed() {
+//                                Toast.makeText(Locky.this, "Fuck Home Key", Toast.LENGTH_SHORT).show();
+//                            }
+//                            @Override
+//                            public void onHomeLongPressed() {
+//                            }
+//                        });
+//                        mHomeWatcher.startWatch();
                     }
 
                     @Override
