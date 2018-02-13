@@ -66,6 +66,7 @@ public class Locky extends AppCompatActivity {
         final String save_pattern = Paper.book().read(save_pattern_key);
 
         if (isScreenOn && save_pattern != null && !save_pattern.equals("null")) {
+            accessible = true;
             setContentView(R.layout.activity_reset__password);
             Button button = findViewById(R.id.resetPasswordButton);
 
@@ -135,6 +136,7 @@ public class Locky extends AppCompatActivity {
 
         else {
             if (save_pattern != null && !save_pattern.equals("null")) {
+                accessible = false;
                 int id = random.nextInt(layoutNum);
                 setContentView(layout.get(id));
 
@@ -225,19 +227,17 @@ public class Locky extends AppCompatActivity {
 
     @Override
     protected void onUserLeaveHint() {
-        Toast.makeText(this, "Please insert the correct pattern", Toast.LENGTH_SHORT).show();
-
         if (accessible) {
             super.onUserLeaveHint();
         }
+        Toast.makeText(this, "Please insert the correct pattern", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onBackPressed(){
-        Toast.makeText(this, "Please insert the correct pattern", Toast.LENGTH_SHORT).show();
-
         if(accessible){
             super.onBackPressed();
         }
+        Toast.makeText(this, "Please insert the correct pattern", Toast.LENGTH_SHORT).show();
     }
 }
