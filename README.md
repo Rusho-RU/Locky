@@ -3,7 +3,11 @@
 
 **Locky** is a Lock Screen App for android device. It helps you set a custom pattern lock for your phone. The app uses mesmerizing backgrounds on the pattern lock screen. It really feels great on the phone.The pattern has to be set for the first time you install the app. The app features a **Reset Pattern** button in case you want.
 
-##How it looks
+## How it looks
+![received_2004710099767817_1](https://user-images.githubusercontent.com/30816219/36130776-c9cd6548-1098-11e8-95e1-e8d3e7249ac3.jpg)
+![received_2004710116434482_1](https://user-images.githubusercontent.com/30816219/36130787-d1c7cd9c-1098-11e8-8405-daba58478138.jpg)
+![received_2004710113101149_1](https://user-images.githubusercontent.com/30816219/36130790-d48957ee-1098-11e8-906c-022791688102.jpg)
+
 
 ## About Testing
 
