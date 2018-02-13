@@ -1,7 +1,7 @@
 # Locky 
 ### the lock-screen app
 
-**Locky** is a Lock Screen App for android device. It helps you set a custom pattern lock for your phone. The app uses mesmerizing backgrounds on the pattern lock screen. It really feels great on the phone.The pattern has to be set for the first time you install the app. The app features a **Reset Pattern** button in case you want.
+**Locky** is a Lock Screen App for android device. It helps you set a custom pattern lock for your phone. The app uses mesmerizing backgrounds on the pattern lock screen. It really feels great on the phone.The pattern has to be set for the first time you install the app. The app features a **Reset Pattern** button in case you want. 
 
 ## How it looks on the Lock-Screen
 ![received_2004710099767817_1](https://user-images.githubusercontent.com/30816219/36130776-c9cd6548-1098-11e8-95e1-e8d3e7249ac3.jpg)
@@ -30,7 +30,7 @@ For downloading Android Studio on Ubuntu, Please visit [this link](https://askub
 ```
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/Rusho-RU/Locky/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning: Locky 0.01
 We did not use any versioning tools. The project is simply virsionized under [github](www.github.com)
